@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+
+<body>
+<script>
+"use strict";
+
+//ES6  
+let promis, i, button, count = 0, answer;      
+
+class User
+{
+    constructor(obj){
+        this.alertText = obj.title;
+        this.button = obj.id;
+        button = document.createElement("button");
+        document.body.append(button);
+        button.innerText = this.button;
+        button.onclick = () => alert(this.alertText);
+    }
+}
+
+for (i = 1; i <= 4; i++)
+{                     
+    promis = new Promise(function (resolve, reject)
+    {
+        resolve(
+            fetch(`https://jsonplaceholder.typicode.com/todos/${i}`)
+            .then(data => data.json())
+            .then(data => (data))
+        )
+    }); 
+
+    promis.then(result => {
+        console.log(result),
+        new User(result)
+        if (result.id)
+        {
+            count++;
+
+            if(count == 4)
+            { 
+            console.log(`${count} answers. All answers received`)
+            }
+        }
+    })
+} 
+</script>
+</body>
+
+</html>
