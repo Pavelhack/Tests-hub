@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>task 5</title>
+</head>
+
+<body>
+  <p><strong>Get iframe...</strong></p>
+
+  <div id="result"></div>
+  <iframe src="domain_one.html" id="domane_one" style="display: none;"></iframe>
+  
+  <script>
+    "use strict"
+
+    window.addEventListener('message', function(event) {
+   
+      // Check browser support
+      if (typeof(Storage) !== "undefined") {
+
+        // Data from domain_one
+        let  dataFrom = JSON.parse(event.data)
+        let obj = {};
+
+        // Write data in localstorage
+        if (dataFrom.name != "" && dataFrom.name != undefined)
+        {
+          localStorage.setItem(dataFrom.name, dataFrom.content);
+          console.log("success! Your object is key : " + dataFrom.name + " value : " + dataFrom.content + " written!");
+          document.getElementById("result").innerHTML = `success! Your object is key : ${dataFrom.name} value : ${dataFrom.content} written!`;
+        }
+        
+        // Get data form localstorage
+        if (dataFrom.getdata != "" && dataFrom.getdata != undefined)
+        {
+          if (localStorage.getItem(dataFrom.getdata) == null)
+          {
+            console.log("sorry your object is`n found");
+            document.getElementById("result").innerHTML = "sorry your object is`n found";
+          }
+          else
+          {
+            console.log(`success : your value read, it : ${localStorage.getItem(dataFrom.getdata)}`);
+            document.getElementById("result").innerHTML = `success : your value read, it : ${localStorage.getItem(dataFrom.getdata)}`; 
+          }
+        }
+        
+        // Get key from localstorage
+        if (dataFrom.getfromindex != "" && dataFrom.getfromindex != undefined)
+        {
+          if  (isNaN(Number(dataFrom.getfromindex)))
+          { 
+            console.log("sorry index should be integer");
+            document.getElementById("result").innerHTML = "sorry index should be integer";
+          }
+          else if (localStorage.key(dataFrom.getfromindex) == null)
+          {
+            console.log("sorry your object is`n found");
+            document.getElementById("result").innerHTML = "sorry your object is`n found";
+          }
+          else
+          {
+            console.log(`success : your key read, it : ${localStorage.key(dataFrom.getfromindex)}`);
+            document.getElementById("result").innerHTML = `success : your key read, it : ${localStorage.key(dataFrom.getfromindex)}`;
+          }
+        }
+      
+        // Delete data from localstorage
+        if (dataFrom.deleteObj != "" && dataFrom.deleteObj != undefined)
+        {
+          if (localStorage.getItem(dataFrom.deleteObj) == null)
+          {
+            console.log("sorry your object is`n found");
+            document.getElementById("result").innerHTML = "sorry your object is`n found";
+          }
+          else
+          {
+            console.log(`success : object ${localStorage.getItem(dataFrom.deleteObj)} : ${localStorage.getItem(dataFrom.deleteObj)} was delete`);
+            document.getElementById("result").innerHTML = `success : object ${localStorage.getItem(dataFrom.deleteObj)} : ${localStorage.getItem(dataFrom.deleteObj)} was delete`;
+            localStorage.removeItem(dataFrom.deleteObj);
+          }
+        }
+        // Check collback
+        if (dataFrom.collback)
+        {
+          for (let i = 0; i <= localStorage.length; i++){
+            name = localStorage.key(i)
+            obj[`${name}`]  =  localStorage.getItem(name)
+          }
+
+          domane_one.contentWindow.postMessage(JSON.stringify(obj), '*');
+        }
+        
+      }
+      else 
+      {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+
+    // window.addEventListener  
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>task 5</title>
+</head>
+
+<body>
+
+  <form id="formset">
+    <div style="border : 2px solid black; height: auto; width: 580px; padding: 1px;">
+      <p style="margin: 2px;"><strong>You can set a data in localStorage</strong></p>
+      <input type="text" placeholder="Inter name, for setData : Key for localStorage" name="key" style="width: 270px;" required>
+      <input type="text" placeholder="Inter titlle for setValue : Content for localStorage" name="content" style="width: 290px;" required>
+    </div>
+    <input type="submit" value="Нажмите для отправки" style="margin-top: 20px;">
+
+  </form>
+
+  <form id = "form"> 
+    <div style="border : 2px solid black; height: auto; width: 580px; padding: 1px; margin-top: 20px;">
+      <p style="margin: 2px;"><strong>You can get a data from localStorage</strong></p>
+      <input type="text" placeholder="Inter name from localStorage." name="getdata_from_name" style="width: 270px;">
+    </div>
+    
+    <div style="border : 2px solid black; height: auto; width: 580px; padding: 1px; margin-top: 20px;">
+      <p style="margin: 2px;"><strong>If you know index of object from localStorage, you can get key from localStorage</strong></p>
+      <input type="text" placeholder="Inter index of key form localStorage" name="getdata_from_index" style="width: 270px;">
+    </div>
+
+    <div style="border : 2px solid black; height: auto; width: 580px; padding: 1px; margin-top: 20px;">
+      <p style="margin: 2px;"><strong>You can delete object from localStorage</strong></p>
+      <input type="text" placeholder="Inter the key form localStorage for delete" name="delete_one_object" style="width: 270px;">
+    </div>
+
+    <input type="submit" value="Нажмите для отправки" style="margin-top: 20px;">
+    <label><input type="checkbox" name="сhoice" value="1">Get collback from domain_two?</label>
+
+  </form>
+
+  <iframe src="domain_two.html" id="iframe" style="display:block; width: 580px; height:100px; margin-top: 20px;" ></iframe>
+
+  <script>
+    "use strict"
+  
+    function collback(data) {
+      console.log(data)
+    }
+
+    let check;
+
+    document.querySelector("label").addEventListener("click", (even) => {
+      check = document.querySelector("label").control.checked;
+    });
+
+    window.addEventListener('message', function(event) {
+   
+      // Check browser support
+        if (typeof(Storage) !== "undefined") {
+
+          // Data from domain_two
+          let  dataFrom = JSON.parse(event.data)
+
+          if(dataFrom != null && dataFrom != undefined)
+          {
+            collback(dataFrom)
+          }
+        }
+        else
+        {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+    })
+
+    form.onsubmit = function()
+    {
+
+    let  obj = {
+              getdata : this.getdata_from_name.value,
+              getfromindex : this.getdata_from_index.value,
+              deleteObj : this.delete_one_object.value,
+              collback : check
+            }
+
+        iframe.contentWindow.postMessage(JSON.stringify(obj), '*');
+
+              this.getdata_from_name.value = "";
+              this.getdata_from_index.value = "";
+              this.delete_one_object.value = "";
+
+        return false;
+    };
+
+    formset.onsubmit = function()
+    {
+    let  setobj = {
+              name : this.key.value,
+              content : this.content.value,
+            }
+
+      iframe.contentWindow.postMessage(JSON.stringify(setobj), '*');
+
+            this.key.value = "";
+            this.content.value = "";
+
+      return false;
+    };
+
+  </script>
+
+</body>
+</html>
