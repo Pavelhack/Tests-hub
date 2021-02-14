@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test task</title>
+</head>
+<body>
+<form id = "form">
+    <fieldset>
+        <legend>Size</legend>
+        <label><input type="radio" name="size" value="S">S</label>
+        <label><input type="radio" name="size" value="M">M</label>
+        <label><input type="radio" name="size" value="L">L</label>
+    </fieldset>
+    <fieldset>
+        <legend>Color</legend>
+        <label><input type="checkbox" name="color" value="1">1</label>
+        <label><input type="checkbox" name="color" value="2">2</label>
+        <label><input type="checkbox" name="color" value="3">3</label>
+        <label><input type="checkbox" name="color" value="4">4</label>
+        <label><input type="checkbox" name="color" value="5">5</label>
+    </fieldset>
+    <fieldset>
+        <legend>Manufacturer</legend>
+        <select multiple name="manufacturer">
+            <option>aaa</option>
+            <option>b&amp;c</option>
+            <option>ddd</option>
+            <option>eee</option>
+        </select>
+        <label><input type="checkbox" data-name="sale" value="распродажа">Распродажа</label>
+    </fieldset>
+</form>
+<script>
+
+const search = new URLSearchParams("size=M&color=1&color=2&manufacturer=aaa&manufacturer=ddd");
+for(const [key, value] of search) {
+    const elem = document.getElementById("form").elements[key];
+    if(!elem) continue;
+    switch(elem.constructor) {
+        case RadioNodeList:
+            for(const node of elem) {
+                if(node.value === value)
+                    node.checked = true;
+            }
+            break;
+        case HTMLSelectElement:
+            for(const option of elem) {
+                if(option.value === value)
+                    option.selected = true;
+            }
+            break;
+        case HTMLInputElement:
+            elem.value = value;
+            if(elem.type === "checkbox")
+                elem.checked = true;
+            break;
+    }
+}
+addEventListener("input", ({ even }) => {
+    if(!even.matches("form [name]")) return;
+    const url = `${new URLSearchParams(new FormData(even.form))}`;
+    console.log(url);
+});
+</script>

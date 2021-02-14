@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add class red</title>
+    <meta charset="UTF-8" />
+    <style>
+      .red {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="text" name="name" id="name_input" value="Xxxx" />
+    
+    <script>
+
+    let input = document.getElementById("name_input");
+    let value = input.getAttribute("value");
+
+    input.addEventListener("change", function()
+    {
+      if (this.value !== value){
+        this.classList.add('red');
+      }
+        else
+      {
+        this.classList.remove('red');
+      }
+    });
+</script>
+  </body>
+</html>
