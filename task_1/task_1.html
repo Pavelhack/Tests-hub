@@ -1,33 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Add class red</title>
-    <meta charset="UTF-8" />
-    <style>
-      .red {
-        color: red;
-      }
-    </style>
-  </head>
 
-  <body>
-    <input type="text" name="name" id="name_input" value="Xxxx" />
-    
-    <script>
+<head>
+  <title>Add class red</title>
+  <meta charset="UTF-8" />
+  <style>
+    .red {
+      color: red;
+    }
 
-    let input = document.getElementById("name_input");
-    let value = input.getAttribute("value");
+    .dirty {
+      border-color: #ff0000;
+      box-shadow: 0 0 3px 5px #ff000080;
+    }
+  </style>
+</head>
 
-    input.addEventListener("change", function()
-    {
-      if (this.value !== value){
-        this.classList.add('red');
+<body>
+  <input type="text" name="name" id="name_input" value="Xxxx" />
+
+  <script>
+    // old
+    (function () {
+      return;
+      const input = document.getElementById("name_input"); // сколько раз ты СОБИРАЕШЬСЯ эту переменную переопределять?
+      const originalValue = input.getAttribute("value"); // will never be changed!
+
+      input.addEventListener("change", function (evt) {
+        const newValue = evt.target.value;
+        const isPristine = newValue === originalValue;
+
+        if (isPristine) {
+          evt.target.classList.remove('red');
+        } else {
+          evt.target.classList.add('red');
+        }
+      });
+
+    })();
+    // new
+    (function () {
+
+      const input = document.getElementById("name_input");
+      addOnDirtyHandlerForElement(input, 'dirty', '');
+
+      function addOnDirtyHandlerForElement(el, className, specificOriginalValue) {
+        const originalValue = (typeof specificOriginalValue === 'undefined') ? el.value : specificOriginalValue;
+        const handler = function (evt) {
+          const newValue = evt.target.value;
+          const isPristine = newValue === originalValue;
+          if (isPristine) {
+            evt.target.classList.remove(className);
+          } else {
+            evt.target.classList.add(className);
+          }
+        };
+        el.addEventListener('change', handler);
+        handler({ target: el });
       }
-        else
-      {
-        this.classList.remove('red');
-      }
-    });
-</script>
-  </body>
+    })();
+
+  </script>
+</body>
+
 </html>
