@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- The source of information  " https://javascript.ru/forum/showthread.php?p=502072 " -->
 <html lang="en">
 
 <head>
@@ -58,13 +59,11 @@
                     if (elem.type === "checkbox")
                         elem.checked = true;
                     break;
-            }
-        }
-        addEventListener("input", ({
-            even
-        }) => {
-            if (!even.matches("form [name]")) return;
-            const url = `${new URLSearchParams(new FormData(even.form))}`;
-            console.log(url);
-        });
-    </script>
+    }
+}
+addEventListener("input", ({ even }) => {
+    if(!even.matches("form [name]")) return;
+    const url = `${new URLSearchParams(new FormData(even.form))}`;
+    console.log(url);
+});
+</script>
