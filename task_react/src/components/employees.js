@@ -5,8 +5,7 @@ let avatar = require("../assets/img/avatar.gif")
 
 class Employees extends React.Component {
     
-    constructor()
-    {
+    constructor(){
         super();
         this.state = {
             people: [],
@@ -22,15 +21,12 @@ class Employees extends React.Component {
         new: false
     }
 
-    componentDidMount()
-    {
+    componentDidMount(){
         this.getPeopleList();
     }
 
-    getPeopleList()
-    {
-        let promis = new Promise(function (resolve, reject)
-        {
+    getPeopleList(){
+        let promis = new Promise(function (resolve, reject){
             resolve(
                 fetch("https://reqres.in/api/users?per_page=12")
                 .then(data => data.json())
@@ -44,8 +40,7 @@ class Employees extends React.Component {
         })
     }
 
-    deletePerson(index)
-    {
+    deletePerson(index){
         this.setState({
             people: [
                 ...this.state.people.slice(0, index),
@@ -55,19 +50,16 @@ class Employees extends React.Component {
     }
 
 
-    addPerson()
-    {
+    addPerson(){
         this.setState({new: true})
     }
 
-    addFun(name, soname, email)
-    {
+    addFun(name, soname, email){
         this.setState({people: this.state.people.concat({"first_name": name, "last_name": soname,"email": email, "avatar" : avatar })});
-        //this.textInput.current.value = ''
     }
 
-    render()
-    {
+    render(){
+
         let list = this.state.people.map((item, index) => {
             return <li key={index} className = "row">
                         <span className="textName">{`${item["first_name"]} ${item["last_name"]}`}</span>
@@ -79,8 +71,7 @@ class Employees extends React.Component {
             </li>;
         });
         
-        if (this.state.new)
-        {
+        if (this.state.new){
             return  <Router>
                         <div className = "order">
                         <Addblock path = "/add" fun = {this.addFun.bind(this)}/>
@@ -89,22 +80,19 @@ class Employees extends React.Component {
                             </ul>
                         </div>
                     </Router>
-        }
-        else
-        {
-            return  <Router>  
-                        
-                        <div className = "order">
-                            <button className = "addBlock_button"
-                                   onClick={ () => this.addPerson()}>Add New !
-                            </button>
+        } else {
+                    return  <Router>  
+                                <div className = "order">
+                                    <button className = "addBlock_button"
+                                        onClick={ () => this.addPerson()}>Add New !
+                                    </button>
 
-                            <ul className="list">
-                                {list}
-                            </ul>
-                        </div>
-                    </Router>
-        }
+                                    <ul className="list">
+                                        {list}
+                                    </ul>
+                                </div>
+                            </Router>
+                }
         
     }
 }

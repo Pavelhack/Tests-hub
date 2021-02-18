@@ -6,8 +6,7 @@ let vk = require("../assets/img/vk.png")
 
 class Home extends React.Component {
 
-    render ()
-    { 
+    render () { 
         return <div className="main-screen">
 
                     <div className="container">

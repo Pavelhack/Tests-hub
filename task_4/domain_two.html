@@ -26,66 +26,55 @@
             let  dataFrom = JSON.parse(event.data)
   
             // Write data in localstorage
-            if (dataFrom.name != "" && dataFrom.name != undefined)
-            {
+            if (dataFrom.name != "" && dataFrom.name != undefined){
               localStorage.setItem(dataFrom.name, dataFrom.content);
               console.log("success! Your object is key : " + dataFrom.name + " value : " + dataFrom.content + " written!");
               document.getElementById("result").innerHTML = `success! Your object is key : ${dataFrom.name} value : ${dataFrom.content} written!`;
             }
             
             // Get data form localstorage
-            if (dataFrom.getdata != "" && dataFrom.getdata != undefined)
-            {
-              if (localStorage.getItem(dataFrom.getdata) == null)
-              {
+            if (dataFrom.getdata != "" && dataFrom.getdata != undefined){
+
+              if (localStorage.getItem(dataFrom.getdata) == null){
                 console.log("sorry your object is`n found");
                 document.getElementById("result").innerHTML = "sorry your object is`n found";
-              }
-              else
-              {
+              } else {
                 console.log(`success : your value read, it : ${localStorage.getItem(dataFrom.getdata)}`);
                 document.getElementById("result").innerHTML = `success : your value read, it : ${localStorage.getItem(dataFrom.getdata)}`; 
               }
+
             }
             
             // Get key from localstorage
-            if (dataFrom.getfromindex != "" && dataFrom.getfromindex != undefined)
-            {
-              if  (isNaN(Number(dataFrom.getfromindex)))
-              { 
+            if (dataFrom.getfromindex != "" && dataFrom.getfromindex != undefined){
+
+              if  (isNaN(Number(dataFrom.getfromindex))){ 
                 console.log("sorry index should be integer");
                 document.getElementById("result").innerHTML = "sorry index should be integer";
-              }
-              else if (localStorage.key(dataFrom.getfromindex) == null)
-              {
+              } else if (localStorage.key(dataFrom.getfromindex) == null){
                 console.log("sorry your object is`n found");
                 document.getElementById("result").innerHTML = "sorry your object is`n found";
-              }
-              else
-              {
+              } else {
                 console.log(`success : your key read, it : ${localStorage.key(dataFrom.getfromindex)}`);
                 document.getElementById("result").innerHTML = `success : your key read, it : ${localStorage.key(dataFrom.getfromindex)}`;
               }
+
             }
           
             // Delete data from localstorage
-            if (dataFrom.deleteObj != "" && dataFrom.deleteObj != undefined)
-            {
-              if (localStorage.getItem(dataFrom.deleteObj) == null)
-              {
+            if (dataFrom.deleteObj != "" && dataFrom.deleteObj != undefined) {
+              if (localStorage.getItem(dataFrom.deleteObj) == null){
                 console.log("sorry your object is`n found");
                 document.getElementById("result").innerHTML = "sorry your object is`n found";
-              }
-              else
-              {
+              } else {
                 console.log(`success : object ${localStorage.getItem(dataFrom.deleteObj)} : ${localStorage.getItem(dataFrom.deleteObj)} was delete`);
                 document.getElementById("result").innerHTML = `success : object ${localStorage.getItem(dataFrom.deleteObj)} : ${localStorage.getItem(dataFrom.deleteObj)} was delete`;
                 localStorage.removeItem(dataFrom.deleteObj);
               }
+
             }
-          }
-          else 
-          {
+
+          } else {
               document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
           } 
       });

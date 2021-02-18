@@ -54,10 +54,9 @@ render(){
                 </footer>
             </div>
         </Router>
-    }
-    else
-    {
-    return <Router>
+    } else {
+
+        return <Router>
             <div className="App">
                 <header className="header">
                     <div className="header__logo">

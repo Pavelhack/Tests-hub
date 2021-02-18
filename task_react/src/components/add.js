@@ -16,7 +16,7 @@ class Addblock extends React.Component{
 
     }
 
-    state ={
+    state = {
        fun: function(){},
        people: {}
     };

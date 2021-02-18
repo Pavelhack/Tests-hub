@@ -42,30 +42,29 @@
   <script>
     "use strict"
 
-    form.onsubmit = function()
-    {
+    form.onsubmit = function(){
 
-    let  obj = {
-              getdata : this.getdata_from_name.value,
-              getfromindex : this.getdata_from_index.value,
-              deleteObj : this.delete_one_object.value,
-            }
+      let  obj = {
+                getdata : this.getdata_from_name.value,
+                getfromindex : this.getdata_from_index.value,
+                deleteObj : this.delete_one_object.value,
+      }
 
-        iframe.contentWindow.postMessage(JSON.stringify(obj), '*');
+      iframe.contentWindow.postMessage(JSON.stringify(obj), '*');
 
-              this.getdata_from_name.value = "";
-              this.getdata_from_index.value = "";
-              this.delete_one_object.value = "";
+                this.getdata_from_name.value = "";
+                this.getdata_from_index.value = "";
+                this.delete_one_object.value = "";
 
-        return false;
+      return false;
+
     };
 
-    formset.onsubmit = function()
-    {
+    formset.onsubmit = function(){
       let setobj = {
               name : this.key.value,
               content : this.content.value,
-            }
+      }
 
       iframe.contentWindow.postMessage(JSON.stringify(setobj), '*');
 
@@ -73,6 +72,7 @@
             this.content.value = "";
 
       return false;
+      
     };
 
   </script>
