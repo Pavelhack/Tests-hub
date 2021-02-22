@@ -19,7 +19,12 @@
 
 ## Task 2
 
-Допустим, что по url `http://любой_домен/filter?size=M&color=1&color=2&manufacturer=aaa&manufacturer=ddd` находится страница, на которой есть такие поля:
+Допустим, что по url :
+```html
+ `http://любой_домен/filter?size=M&color=1&color=2&manufacturer=aaa&manufacturer=ddd`
+ ```
+находится страница, на которой есть такие поля:
+
 
 * радио для size (значения - S, M, L)
 * несколько чекбоксов для color (значения - 1, 2, 3, 4, 5)
