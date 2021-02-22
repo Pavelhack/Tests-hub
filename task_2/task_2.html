@@ -61,9 +61,9 @@
                     break;
     }
 }
-addEventListener("input", ({ even }) => {
-    if(!even.matches("form [name]")) return;
-    const url = `${new URLSearchParams(new FormData(even.form))}`;
+addEventListener("input", ( {target : element} ) => {
+    if(!element.matches("form [name]")) return;
+    const url = `${new URLSearchParams(new FormData(element.form))}`;
     console.log(url);
 });
 </script>
