@@ -11,54 +11,16 @@
 <body>
     <!-- 
 
-От сих и далее: запрещается использовать JS внутри тега SCRIPT. Только отдельно стоящим JS файлом
+    От сих и далее: запрещается использовать JS внутри тега SCRIPT. Только отдельно стоящим JS файлом
 
-Задание: 
-1. Переделать этот таск и все последующие
-2. Использовать спелл-чекер для именования переменных. 
-    Все варнинги спелчекера принимать очень близко к сердцу.
-3. Код работает, но не так, как ты задумывал. Найди причину.
+    Задание: 
+    1. Переделать этот таск и все последующие
+    2. Использовать спелл-чекер для именования переменных. 
+        Все варнинги спелчекера принимать очень близко к сердцу.
+    3. Код работает, но не так, как ты задумывал. Найди причину.
 
     -->
-<script>
-"use strict";
 
-//ES6  
-let promis, count = 0, i, button;
-
-class User{
-    constructor(obj){
-        this.alertText = obj.title;
-        this.button = obj.id;
-        button = document.createElement("button");
-        document.body.append(button);
-        button.innerText = this.button;
-        button.onclick = () => alert(this.alertText);
-    }
-}
-
-for (i = 1; i <= 4; i++){                     
-    promis = new Promise(function (resolve, reject){
-        resolve(
-            fetch(`https://jsonplaceholder.typicode.com/todos/${i}`)
-            .then(data => data.json())
-            .then(data => (data))
-        )
-    }); 
-
-    promis.then(result => {
-        console.log(result),
-        new User(result)
-        if (result.id){
-            count++;
-
-            if(count == 4){ 
-            console.log(`${count} answers. All answers received`)
-            }
-        }
-    })
-} 
-</script>
 </body>
-
+<script src="task03.js"></script>
 </html>
