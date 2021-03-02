@@ -1,0 +1,36 @@
+{
+  "name": "pavelhack",
+  "version": "1.0.0",
+  "description": "> Можно использовать любую парадигму (ООП, ФП и т.д.), и код организовать можно любым удобным способом. > При написании решений предпочтительнее использовать чистый ES2015 (кроме задачи №6 - там React). Результат лучше представить в виде ссылки на ресурс вроде https://jsfiddle.net/ (это просто способ передачи кода, не нужно добиваться его работы именно в пределах ресурса). > Пожалуйста, не присылайте .rar-архивы — у нас тут открытое ПО, поэтому проприетарные форматы и архиваторы не поддерживаются.<br>",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "test": "jest side_tasks/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/Pavelhack/tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/Pavelhack/tests/issues"
+  },
+  "homepage": "https://gitlab.com/Pavelhack/tests#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "babel-jest": "^26.6.3",
+    "core-js": "^3.9.1",
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  }
+}

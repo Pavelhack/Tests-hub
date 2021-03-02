@@ -8,7 +8,7 @@ It's important to understand the difference between:
 
 ## Чтобы понимать, как работает `for..of`, требуется знать:
 
-* Calculated properties
+* Computed (dynamic) property names
 * Symbols, well-know symbols, Symbol.iterator
 * Closures
 
